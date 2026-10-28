@@ -1,0 +1,33 @@
+name: Tydenni kontrola zdroju
+on:
+  schedule:
+    - cron: '15 3 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test_feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Kontrola XML Naradi-Praha
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, xml.etree.ElementTree as ET
+          url = "https://feeds.mergado.com/naradi-praha-cz-heureka-cz-92c0f0d84d921e653b3520c9875ee4be.xml"
+          req = urllib.request.Request(url,headers={"User-Agent":"ChytryNakup-FeedCheck/1.0"})
+          with urllib.request.urlopen(req,timeout=90) as response:
+              with open("/tmp/overeni.xml","wb") as f:
+                  while True:
+                      block=response.read(1024*1024)
+                      if not block: break
+                      f.write(block)
+          count=0
+          for event,elem in ET.iterparse("/tmp/overeni.xml",events=("end",)):
+              if elem.tag.rsplit("}",1)[-1]=="SHOPITEM":
+                  count+=1
+                  elem.clear()
+          if not count: raise RuntimeError("XML neobsahuje produkty")
+          print(f"XML v poradku, pocet zaznamu: {count}")
+          PY
