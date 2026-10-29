@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-29",
+  "note": "Interní evidence partnerů; nezapíná publikaci ani provizní odkazy. Identifikátory doplnit pouze po ověření.",
+  "partners": [
+    {
+      "name": "Nářadí-Praha.cz",
+      "commission_percent": 3.2,
+      "approval": "approved",
+      "xml_permission": "confirmed",
+      "affiliate_links": "previously_tested_in_V5_not_in_repository",
+      "catalog_enabled": false
+    },
+    {
+      "name": "Portál.cz",
+      "commission_percent": 4,
+      "approval": "approved",
+      "xml_permission": "not_verified",
+      "affiliate_links": "campaign_id_pending_verification",
+      "catalog_enabled": false
+    },
+    {
+      "name": "Venixvape.cz",
+      "commission_percent": 10,
+      "approval": "approved",
+      "xml_permission": "not_verified",
+      "affiliate_links": "not_configured",
+      "catalog_enabled": false,
+      "restriction": "Age-restricted vaping products; do not publish or promote without applicable compliance review."
+    }
+  ]
+}
